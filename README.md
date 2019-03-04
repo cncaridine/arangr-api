@@ -6,8 +6,11 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+### 2.6.1p33
 
 * System dependencies
+### Running Locally
+Must have Ruby, Postgres, React, Bundler and Heroku
 
 * Configuration
 
@@ -22,5 +25,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-cori

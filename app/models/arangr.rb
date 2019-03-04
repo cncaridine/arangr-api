@@ -1,6 +1,11 @@
 class Arangr
-  # connect to postgres
+  # connect to heroku postgres
+  if(ENV['https://arangr-api.herokuapp.com/'])
+    uri = URI.parse(ENV['https://arangr-api.herokuapp.com/'])
+    DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
+  else
     DB = PG.connect({:host => "localhost", :port => 5432, :dbname => 'arangr-api_development'})
+  end
   # index
   def self.all
     results = DB.exec("SELECT * FROM events;")
@@ -35,7 +40,7 @@ class Arangr
   def self.create(opts)
     results = DB.exec(
       <<-SQL
-        INSERT INTO events(title, image, date, time, description, rsvp)
+        INSERT INTO events(title, image, date, time, location description, rsvp)
         VALUES ( '#{opts["title"]}', '#{opts["image"]}', '#{opts["date"]}', '#{opts["time"]}', '#{opts["description"]}',
         '#{opts["location"]}', '#{opts["rsvp"]}')
         RETURNING id, title, image, date, time, location, description, rsvp;
