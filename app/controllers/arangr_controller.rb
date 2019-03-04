@@ -28,4 +28,7 @@ class ArangrController < ApplicationController
   # ===============
   # update route
   # ===============
+  def update
+    render json: Arangr.update(params["id"], params["arangr"])
+  end
 end

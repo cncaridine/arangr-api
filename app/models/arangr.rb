@@ -36,8 +36,9 @@ class Arangr
     results = DB.exec(
       <<-SQL
         INSERT INTO events(title, image, date, time, description, rsvp)
-        VALUES ( '#{opts["title"]}', '#{opts["image"]}', '#{opts["date"]}', '#{opts["time"]}', '#{opts["description"]}', '#{opts["rsvp"]}')
-        RETURNING id, title, image, date, time, description, rsvp;
+        VALUES ( '#{opts["title"]}', '#{opts["image"]}', '#{opts["date"]}', '#{opts["time"]}', '#{opts["description"]}',
+        '#{opts["location"]}', '#{opts["rsvp"]}')
+        RETURNING id, title, image, date, time, location, description, rsvp;
       SQL
     )
     return {
@@ -57,6 +58,25 @@ class Arangr
     return { "deleted" => true }
   end
   # update route
-
+  def self.update(id, opts)
+    results = DB.exec(
+      <<-SQL
+        UPDATE events
+        SET title='#{opts["title"]}', image='#{opts["image"]}', date='#{opts["date"]}', time='#{opts["time"]}', location='#{opts["location"]}', description='#{opts["description"]}', rsvp='#{opts["rsvp"]}'
+        WHERE id=#{id}
+        RETURNING id, title, image, date, time, location, description, rsvp;
+      SQL
+    )
+    return {
+      "id" => results.first["id"].to_i,
+      "title" => results.first["title"],
+      "image" => results.first["image"],
+      "date" => results.first["date"],
+      "time" => results.first["time"].to_i,
+      "location" => results.first["location"],
+      "description" => results.first["description"],
+      "rsvp" => results.first["rsvp"]
+    }
+  end
   # closing for class
 end
