@@ -8,13 +8,15 @@ class ArangrController < ApplicationController
   # ===============
   # show route
   # ===============
-def show
-  render json:  Arangr.find(params["id"])
-end
+  def show
+    render json:  Arangr.find(params["id"])
+  end
   # ===============
   # create route
   # ===============
-
+  def create
+      render json: Arangr.create(params["arangr"])
+  end
   # ===============
   # delete route
   # ===============

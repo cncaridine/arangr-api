@@ -32,7 +32,25 @@ class Arangr
     }
   end
   # create route
-
+  def self.create(opts)
+    results = DB.exec(
+      <<-SQL
+        INSERT INTO events(title, image, date, time, description, rsvp)
+        VALUES ( '#{opts["title"]}', '#{opts["image"]}', '#{opts["date"]}', '#{opts["time"]}', '#{opts["description"]}', '#{opts["rsvp"]}')
+        RETURNING id, title, image, date, time, description, rsvp;
+      SQL
+    )
+    return {
+      "id" => results.first["id"].to_i,
+      "title" => results.first["title"],
+      "image" => results.first["image"],
+      "date" => results.first["date"],
+      "time" => results.first["time"].to_i,
+      "location" => results.first["location"],
+      "description" => results.first["description"],
+      "rsvp" => results.first["rsvp"]
+    }
+  end
   # delete route
 
   # update route
