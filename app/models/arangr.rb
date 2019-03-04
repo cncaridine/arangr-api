@@ -52,7 +52,10 @@ class Arangr
     }
   end
   # delete route
-
+  def self.delete(id)
+    results = DB.exec("DELETE FROM events WHERE id=#{id};")
+    return { "deleted" => true }
+  end
   # update route
 
   # closing for class

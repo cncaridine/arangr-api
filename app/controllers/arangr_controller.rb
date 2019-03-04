@@ -22,7 +22,9 @@ class ArangrController < ApplicationController
   # ===============
   # delete route
   # ===============
-
+  def delete
+      render json: Arangr.delete(params["id"])
+  end
   # ===============
   # update route
   # ===============
