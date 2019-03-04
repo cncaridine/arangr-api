@@ -1,14 +1,41 @@
 class Arangr
   # connect to postgres
     DB = PG.connect({:host => "localhost", :port => 5432, :dbname => 'arangr-api_development'})
+  # index
   def self.all
     results = DB.exec("SELECT * FROM events;")
-    results.each do |result|
-            puts result
-        end
-    [
-      { title: 'SXSW', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCBnCKq0A47VX0n617wfSe7-i2wOJ3K5X0y3RO1svJ1y_mTRj4Yg', day: 'march', time: 7, location: 'Austin TX', description: 'music festival of the year', rsvp: true },
-      { title: 'SXSW', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCBnCKq0A47VX0n617wfSe7-i2wOJ3K5X0y3RO1svJ1y_mTRj4Yg', day: 'march', time: 7, location: 'Austin TX', description: 'music festival of the year', rsvp: true }
-    ]
+    return results.map do |result|
+      {
+        "id" => result["id"].to_i,
+        "title" => result["title"],
+        "image" => result["image"],
+        "date" => result["date"],
+        "time" => result["time"].to_i,
+        "location" => result["location"],
+        "description" => result["description"],
+        "rsvp" => result["rsvp"]
+      }
+    end
   end
+# show route
+  def self.find(id)
+     results = DB.exec("SELECT * FROM events WHERE id=#{id};")
+    return {
+      "id" => results.first["id"].to_i,
+      "title" => results.first["title"],
+      "image" => results.first["image"],
+      "date" => results.first["date"],
+      "time" => results.first["time"].to_i,
+      "location" => results.first["location"],
+      "description" => results.first["description"],
+      "rsvp" => results.first["rsvp"]
+    }
+  end
+  # create route
+
+  # delete route
+
+  # update route
+
+  # closing for class
 end

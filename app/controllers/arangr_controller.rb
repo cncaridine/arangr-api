@@ -8,13 +8,11 @@ class ArangrController < ApplicationController
   # ===============
   # show route
   # ===============
-
+def show
+  render json:  Arangr.find(params["id"])
+end
   # ===============
   # create route
-  # ===============
-
-  # ===============
-  # index route
   # ===============
 
   # ===============
