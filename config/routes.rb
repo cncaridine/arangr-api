@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # ===========
   # create route
   # ===========
-  post '/arangr/:id', to:'arangr#create'
+  post '/arangr', to:'arangr#create'
   # ===========
   # delete route
   # ===========
