@@ -40,7 +40,7 @@ class Arangr
   def self.create(opts)
     results = DB.exec(
       <<-SQL
-        INSERT INTO events(title, image, date, time, location description, rsvp)
+        INSERT INTO events(title, image, date, time, location, description, rsvp)
         VALUES ( '#{opts["title"]}', '#{opts["image"]}', '#{opts["date"]}', '#{opts["time"]}', '#{opts["description"]}',
         '#{opts["location"]}', '#{opts["rsvp"]}')
         RETURNING id, title, image, date, time, location, description, rsvp;
