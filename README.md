@@ -6,7 +6,6 @@
 
 ## Sites:
 * [Arangr](https://arangr-api.herokuapp.com/)
-* [Arangr Front-end](https://arangr-front-end.herokuapp.com/)
 * [Arangr Frontend GitHub](https://github.com/qui1217/arangr-front-end)
 
 ## Approach
