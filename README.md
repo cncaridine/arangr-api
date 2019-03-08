@@ -5,7 +5,7 @@
 * Brendan Quirk
 
 ## Sites:
-* [Arangr](https://arangr-api.herokuapp.com/)
+* [Arangr](https://arangr-front-end.herokuapp.com/)
 * [Arangr Frontend GitHub](https://github.com/qui1217/arangr-front-end)
 
 ## Approach
